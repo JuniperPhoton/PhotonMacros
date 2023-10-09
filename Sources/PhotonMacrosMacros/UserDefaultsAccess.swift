@@ -4,7 +4,7 @@ import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 import SwiftDiagnostics
 
-public struct PropertyAccessMacro: AccessorMacro {
+public struct UserDefaultsAccessMacro: AccessorMacro {
     public static func expansion<Context: SwiftSyntaxMacros.MacroExpansionContext, DeclSyntax: SwiftSyntax.DeclSyntaxProtocol>(
         of node: SwiftSyntax.AttributeSyntax,
         providingAccessorsOf declaration: DeclSyntax,
@@ -132,6 +132,6 @@ struct MacroError: DiagnosticMessage, Error {
 @main
 struct PhotonMacrosPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        PropertyAccessMacro.self
+        UserDefaultsAccessMacro.self
     ]
 }

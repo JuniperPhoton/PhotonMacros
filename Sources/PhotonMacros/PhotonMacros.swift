@@ -5,4 +5,4 @@ import Foundation
 ///
 /// Currently supports String, Bool and Integer types.
 @attached(accessor)
-public macro PropertyAccess<T>(defaultValue: T, key: String? = nil, store: UserDefaults = UserDefaults.standard) = #externalMacro(module: "PhotonMacrosMacros", type: "PropertyAccessMacro")
+public macro UserDefaultsAccess<T>(defaultValue: T, key: String? = nil, store: UserDefaults = UserDefaults.standard) = #externalMacro(module: "PhotonMacrosMacros", type: "UserDefaultsAccessMacro")

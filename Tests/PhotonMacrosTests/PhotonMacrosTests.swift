@@ -7,7 +7,7 @@ import XCTest
 import PhotonMacrosMacros
 
 let testMacros: [String: Macro.Type] = [
-    "PropertyAccess": PropertyAccessMacro.self
+    "UserDefaultsAccess": UserDefaultsAccessMacro.self
 ]
 #endif
 
@@ -16,7 +16,7 @@ final class PhotonMacrosTests: XCTestCase {
 #if canImport(PhotonMacrosMacros)
         assertMacroExpansion(
         """
-        @PropertyAccess(defaultValue: false, key: "enable_notification")
+        @UserDefaultsAccess(defaultValue: false, key: "enable_notification")
         var enableNotification: Bool
         """,
         expandedSource: """
@@ -43,7 +43,7 @@ final class PhotonMacrosTests: XCTestCase {
 #if canImport(PhotonMacrosMacros)
         assertMacroExpansion(
         """
-        @PropertyAccess(defaultValue: false)
+        @UserDefaultsAccess(defaultValue: false)
         var enableNotification: Bool
         """,
         expandedSource: """
