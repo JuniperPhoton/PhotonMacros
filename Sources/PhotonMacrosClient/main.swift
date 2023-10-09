@@ -1,8 +1,15 @@
 import PhotonMacros
+import Foundation
 
-let a = 17
-let b = 25
-
-let (result, code) = #stringify(a + b)
-
-print("The value \(result) was produced by the code \"\(code)\"")
+class AppSettings {
+    static var customStore: UserDefaults = UserDefaults.init(suiteName: "com.juniperphoton")!
+    
+    @PropertyAccess(defaultValue: false, key: "enable_notification")
+    var enableNotification: Bool
+    
+    @PropertyAccess(defaultValue: "", store: AppSettings.customStore)
+    var userId: String
+    
+    @PropertyAccess(defaultValue: 0)
+    var deleteCount: Int
+}
