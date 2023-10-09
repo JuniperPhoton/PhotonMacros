@@ -4,7 +4,7 @@ Provides some useful macros to use in iOS/macOS development.
 
 ## UserDefaultsAccess
 
-This is an attached macro to generate the get/set access to the provided user default.
+This is an attached macro to generate the get/set access to the provided user default. Currently supports types of `Bool`, `Integer` and `String`.
 
 The signature of this macro is:
 ```swift
