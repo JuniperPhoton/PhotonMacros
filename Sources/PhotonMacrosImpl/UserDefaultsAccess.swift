@@ -86,7 +86,7 @@ public struct UserDefaultsAccessMacro: AccessorMacro {
         return [
             """
             get {
-                if UserDefaults.standard.value(forKey: \(raw: storeKeyValue)) == nil {
+                if \(raw: storeExpression).value(forKey: \(raw: storeKeyValue)) == nil {
                     return \(raw: defaultValueDescription)
                 }
                 return \(getExpression)
