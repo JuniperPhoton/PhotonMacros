@@ -12,4 +12,7 @@ class AppSettings {
     
     @UserDefaultsAccess(defaultValue: 0)
     var deleteCount: Int
+    
+    @UserDefaultsAccess(defaultValue: Float.nan)
+    var exposureValue: Float
 }

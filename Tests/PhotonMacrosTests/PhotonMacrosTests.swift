@@ -12,6 +12,33 @@ let testMacros: [String: Macro.Type] = [
 #endif
 
 final class PhotonMacrosTests: XCTestCase {
+    func testFloatAccess() throws {
+#if canImport(PhotonMacrosImpl)
+        assertMacroExpansion(
+        """
+        @UserDefaultsAccess(defaultValue: Float.nan)
+        var relativeValue: Float
+        """,
+        expandedSource: """
+        var relativeValue: Float {
+            get {
+                if UserDefaults.standard.value(forKey: "relativeValue") == nil {
+                    return Float.nan
+                }
+                return UserDefaults.standard.float(forKey: "relativeValue") ?? Float.nan
+            }
+            set {
+                UserDefaults.standard.setValue(newValue, forKey: "relativeValue")
+            }
+        }
+        """,
+        macros: testMacros
+        )
+#else
+        throw XCTSkip("macros are only supported when running tests for the host platform")
+#endif
+    }
+    
     func testPropertyAccess() throws {
 #if canImport(PhotonMacrosImpl)
         assertMacroExpansion(
