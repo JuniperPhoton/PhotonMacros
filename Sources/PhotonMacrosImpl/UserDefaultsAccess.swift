@@ -32,6 +32,8 @@ public struct UserDefaultsAccessMacro: AccessorMacro {
             propertyTypeExpression = "Int"
         } else if let _ = defaultValueExpression.as(StringLiteralExprSyntax.self) {
             propertyTypeExpression = "String"
+        } else if let _ = defaultValueExpression.as(FloatLiteralExprSyntax.self) {
+            propertyTypeExpression = "Float"
         } else {
             context.diagnose(.init(node: node, message: UnsupportedTypeError()))
             return []
@@ -78,6 +80,10 @@ public struct UserDefaultsAccessMacro: AccessorMacro {
             getExpression = """
             \(raw: storeExpression).string(forKey: \(raw: storeKeyValue)) ?? \(raw: defaultValueDescription)
             """
+        } else if propertyTypeExpression == "Float" {
+            getExpression = """
+            \(raw: storeExpression).float(forKey: \(raw: storeKeyValue)) ?? \(raw: defaultValueDescription)
+            """
         } else {
             context.diagnose(.init(node: node, message: UnsupportedTypeError()))
             return []
@@ -106,7 +112,7 @@ struct UnsupportedTypeError: DiagnosticMessage, Error {
     
     var severity: SwiftDiagnostics.DiagnosticSeverity = .error
     
-    let message: String = "Unsupported type. Supported types are: String, Int, Bool."
+    let message: String = "Unsupported type. Supported types are: String, Int, Bool, Float."
 }
 
 struct SyntaxParseError: DiagnosticMessage, Error {
