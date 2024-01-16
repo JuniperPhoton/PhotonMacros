@@ -25,7 +25,7 @@ final class PhotonMacrosTests: XCTestCase {
                 if UserDefaults.standard.value(forKey: "relativeValue") == nil {
                     return Float.nan
                 }
-                return UserDefaults.standard.float(forKey: "relativeValue") ?? Float.nan
+                return UserDefaults.standard.float(forKey: "relativeValue")
             }
             set {
                 UserDefaults.standard.setValue(newValue, forKey: "relativeValue")

@@ -87,7 +87,7 @@ public struct UserDefaultsAccessMacro: AccessorMacro {
             """
         } else if propertyTypeExpression == "Float" {
             getExpression = """
-            \(raw: storeExpression).float(forKey: \(raw: storeKeyValue)) ?? \(raw: defaultValueDescription)
+            \(raw: storeExpression).float(forKey: \(raw: storeKeyValue))
             """
         } else {
             context.diagnose(.init(node: node, message: UnsupportedTypeError()))
