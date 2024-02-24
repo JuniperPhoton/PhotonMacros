@@ -43,19 +43,22 @@ final class PhotonMacrosTests: XCTestCase {
 #if canImport(PhotonMacrosImpl)
         assertMacroExpansion(
         """
-        @UserDefaultsAccess(defaultValue: false, key: "enable_notification")
+        let enableNotificationKey = "enable_notification"
+        
+        @UserDefaultsAccess(defaultValue: false, key: enableNotificationKey
         var enableNotification: Bool
         """,
         expandedSource: """
+        let enableNotificationKey = "enable_notification"
         var enableNotification: Bool {
             get {
-                if UserDefaults.standard.value(forKey: "enable_notification") == nil {
+                if UserDefaults.standard.value(forKey: enableNotificationKey) == nil {
                     return false
                 }
-                return UserDefaults.standard.bool(forKey: "enable_notification")
+                return UserDefaults.standard.bool(forKey: enableNotificationKey)
             }
             set {
-                UserDefaults.standard.setValue(newValue, forKey: "enable_notification")
+                UserDefaults.standard.setValue(newValue, forKey: enableNotificationKey)
             }
         }
         """,
