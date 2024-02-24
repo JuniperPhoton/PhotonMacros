@@ -66,7 +66,10 @@ public struct UserDefaultsAccessMacro: AccessorMacro {
             syntax.label?.text == "key"
         }
         
-        let storeKeyValue = keySyntax?.expression.as(StringLiteralExprSyntax.self)?.description ?? "\"\(firstBindingSyntax.identifier.text)\""
+        guard let storeKeyValue: String = keySyntax?.expression.description else {
+            context.diagnose(.init(node: node, message: SyntaxParseError()))
+            return []
+        }
         
         let getExpression: AccessorDeclSyntax
         let setExpression: AccessorDeclSyntax = """
